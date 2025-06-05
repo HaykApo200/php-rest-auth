@@ -1,7 +1,7 @@
 const form = document.getElementById('signup-form');
 const result = document.getElementById('result');
 
-form.addEventListener('submit', async function(e) {
+form.addEventListener('submit', async function (e) {
     e.preventDefault();
 
     const formData = new FormData(form);
