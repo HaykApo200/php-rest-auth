@@ -40,4 +40,19 @@ class UserController
 
         return ['status' => 'success', 'message' => 'User created'];
     }
+
+    public function login(string $email, string $password): array
+    {
+        $user = $this->userModel->findByEmail($email);
+
+        if (!$user) {
+            throw new ValidationException("User not found");
+        }
+
+        if (!password_verify($password, $user['password_hash'])) {
+            throw new ValidationException("Invalid credentials");
+        }
+
+        return ['message' => 'Login successful'];
+    }
 }
