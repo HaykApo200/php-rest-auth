@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<ruleset name="PSR">
+    <description>Simple PHPCS ruleset using PSR-12</description>
+
+    <!-- Use PSR-12 coding standard -->
+    <rule ref="PSR12">
+        <exclude name="PSR1.Files.SideEffects.FoundWithSymbols" />
+    </rule>
+
+    <!-- Scan all PHP files in current directory -->
+    <file>./</file>
+
+    <exclude-pattern>vendor/*</exclude-pattern>
+
+    <!-- Show warnings, not just errors -->
+    <arg name="warning-severity" value="5"/>
+
+    <!-- Enable colored output -->
+    <arg name="colors"/>
+</ruleset>
