@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace App\Controllers;
 
 use App\Models\User;
+use App\Exceptions\UserExistsException;
+use App\Exceptions\ValidationException;
+use Exception;
 
 class UserController
 {
@@ -15,12 +18,26 @@ class UserController
         $this->userModel = new User();
     }
 
-    public function register(string $email, string $password) 
+    public function register(string $email, string $password): array
     {
-        // $existing = $this->userModel->findByEmail($email);
-        // if ($existing) {
-        //     return ['status' => 'error']
-        // }
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            throw new ValidationException("Invalid email format");
+        }
 
+        if (strlen($password) < 6) {
+            throw new ValidationException("Password must be at least 6 characters");
+        }
+
+        $existing = $this->userModel->findByEmail($email);
+        if ($existing) {
+            throw new UserExistsException("Email already exists");
+        }
+
+        $created = $this->userModel->createUser($email, $password);
+        if (!$created) {
+            throw new \Exception("User could not be created");
+        }
+
+        return ['status' => 'success', 'message' => 'User created'];
     }
 }
