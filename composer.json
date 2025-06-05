@@ -3,7 +3,7 @@
     "description": "Sign Up and Login page",
     "autoload": {
         "psr-4": {
-            "App\\": "src/"
+            "App\\": "app/"
         }
     },
     "authors": [
