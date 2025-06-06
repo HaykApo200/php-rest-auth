@@ -12,7 +12,7 @@ header('Content-Type: application/json');
 
 try {
     $data = json_decode(file_get_contents("php://input"), true);
-    file_put_contents(__DIR__ . '/debug.txt', print_r($data, true));
+    //file_put_contents(__DIR__ . '/debug.txt', print_r($data, true));
     if (!isset($data['email']) || !isset($data['password'])) {
         throw new ValidationException("Missing email or password");
     }
