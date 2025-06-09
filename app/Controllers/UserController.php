@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Controllers;
 
+require_once __DIR__ . "/../../vendor/autoload.php";
+
 use App\Models\User;
 use App\Services\TokenService;
 use App\Exceptions\UserExistsException;
