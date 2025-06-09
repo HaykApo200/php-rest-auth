@@ -22,6 +22,7 @@ form.addEventListener('submit', async function (e) {
         const resultData = await response.json();
         if (response.ok) {
             result.innerText = resultData.message || "Login successful";
+            localStorage.setItem('token', resultData.token);
         } else {
             result.innerText = resultData.error || "Login failed";
         }
