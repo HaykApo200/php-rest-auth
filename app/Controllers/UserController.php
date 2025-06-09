@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Controllers;
 
 use App\Models\User;
+use App\Services\TokenService;
 use App\Exceptions\UserExistsException;
 use App\Exceptions\ValidationException;
 use Exception;
@@ -53,6 +54,12 @@ class UserController
             throw new ValidationException("Invalid credentials");
         }
 
-        return ['message' => 'Login successful'];
+        $tokenService = new TokenService();
+        $token = $tokenService->generateToken($email);
+
+        return [
+            'message' => 'Login successful',
+            'token' => $token
+        ];
     }
 }
